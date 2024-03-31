@@ -1,0 +1,284 @@
+<!-- home.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(rgba(28, 28, 28, 0.9), rgba(0, 0, 0, 0.8)), url('{{ url_for("static", filename="images/avinash.jpg") }}');
+            background-blend-mode: overlay;
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            backdrop-filter: blur(3px);
+        }
+
+        header, footer {
+            backdrop-filter: blur(3px);
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            width: 100%;
+            margin-top: 20px; /* Adjusted margin to move down the header content */
+        }
+
+        nav {
+            background-color: rgba(85, 85, 85, 0.8); /* Semi-transparent darker gray */
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100; /* Ensure the nav bar is above other elements */
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease; /* Smooth transition on hover */
+        }
+
+        nav a:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 80px; /* Adjusted margin to give space for nav bar */
+        }
+
+        .property-card {
+            width: 300px;
+            margin: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .property-card:hover {
+            transform: scale(1.05);
+        }
+
+        .property-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .property-details {
+            padding: 15px;
+            text-align: left;
+            color: #333;
+        }
+
+        .property-details h4 {
+            margin-bottom: 10px;
+            color: #444;
+            font-size: 1.5rem;
+        }
+
+        .property-details p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .property-card:nth-child(1) .property-image {
+            background-image: url('{{ url_for("static", filename="images/aroma.jpg") }}');
+        }
+
+        .property-card:nth-child(2) .property-image {
+            background-image: url('{{ url_for("static", filename="images/jibin.jpeg") }}');
+        }
+
+        .property-card:nth-child(3) .property-image {
+            background-image: url('{{ url_for("static", filename="images/azeeza.jpg") }}');
+        }
+
+        .explore-button {
+            margin-top: 20px;
+            background-color: #fff;
+            color: #333;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .explore-button:hover {
+            background-color: #ddd;
+        }
+
+        footer {
+            padding: 30px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            border-top: 2px solid #fff;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .footer-content div {
+            width: 30%;
+            padding: 15px;
+            margin: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+        }
+
+        .footer-content h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-content p {
+            color: #ddd;
+            margin: 8px 0;
+            font-size: 1rem;
+        }
+
+        .footer-content .contact-details,
+        .footer-content .location,
+        .footer-content .services {
+            width: 30%;
+            padding: 15px;
+            margin: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+        }
+
+        .footer-content .contact-details h3,
+        .footer-content .location h3,
+        .footer-content .services h3 {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .footer-content .contact-details p,
+        .footer-content .location p,
+        .footer-content .services p {
+            font-size: 1rem;
+            color: #ddd;
+            margin: 8px 0;
+        }
+
+        .footer-content .location {
+            text-align: center;
+        }
+
+        .footer-content .location p.address {
+            color: #ddd;
+            font-size: 1rem;
+            margin: 8px 0;
+        }
+
+        .footer-content .location p.hours {
+            color: #ddd;
+            font-size: 1rem;
+            margin: 8px 0;
+        }
+    </style>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('add_property') }}">Add Property</a>
+        <a href="{{ url_for('feature_listing') }}">Feature Listing</a>
+        <a href="{{ url_for('predict') }}">Prediction</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+
+    <header>
+        <h2>Discover Your Dream Home</h2>
+        <p>Find the perfect property that suits your lifestyle. Explore our featured properties and connect with us for a personalized experience.</p>
+    </header>
+
+    <div class="card-container">
+        <div class="property-card">
+            <div class="property-image"></div>
+            <div class="property-details">
+                <h4>Modern City Apartment</h4>
+                <p>2 Bed | 2 Bath | $500,000</p>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <div class="property-image"></div>
+            <div class="property-details">
+                <h4>Luxury Beachfront Villa</h4>
+                <p>4 Bed | 3 Bath | $1,200,000</p>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <div class="property-image"></div>
+            <div class="property-details">
+                <h4>Charming Countryside Cottage</h4>
+                <p>3 Bed | 2 Bath | $350,000</p>
+            </div>
+        </div>
+    </div>
+
+    <p><center><button class="explore-button" onclick="location.href='feature_listing'">Explore Featured Listings</button></center></p>
+
+    <footer class="footer mt-auto py-3 text-white">
+        <div class="container">
+            <div class="footer-content">
+                <div class="services">
+                    <h3>Our Services</h3>
+                    <p>Buy, Sell, Rent</p>
+                </div>
+                <div class="location">
+                    <h3>Location</h3>
+                    <p class="address">123 Main Street, Cityville, USA</p>
+                </div>
+                <div class="consulting-hours">
+                    <h3>Consulting Hours</h3>
+                    <p class="hours">Mon-Fri: 9 AM - 6 PM</p>
+                </div>
+                <div class="contact-details">
+                    <h3>Contact Details</h3>
+                    <p>Email: info@realestate.com</p>
+                    <p>Phone: +1 (123) 456-7890</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

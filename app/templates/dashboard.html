@@ -1,0 +1,106 @@
+<!-- dashboard.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('{{ url_for("static", filename="images/main-image.jpg") }}'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            color: #fff; /* White text for better contrast */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        header {
+            background-color: rgba(51, 51, 51, 0.8); /* Semi-transparent dark gray */
+            padding: 15px;
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+        }
+
+        nav {
+            background-color: rgba(85, 85, 85, 0.8); /* Semi-transparent darker gray */
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease; /* Smooth transition on hover */
+        }
+
+        nav a:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 60px; /* Adjusted margin to give space for nav bar */
+            color: #fff; /* White text for better contrast */
+        }
+
+        p {
+            font-size: 24px; /* Increased font size */
+            margin: 20px auto;
+            padding: 20px;
+            background: linear-gradient(to right, #f06, #9f6); /* Attractive gradient background */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            animation: blink-glitter 2s linear infinite; /* Combined blink and glitter animation */
+        }
+
+        @keyframes blink-glitter {
+            0%, 100% {
+                background: linear-gradient(to right, #f06, #9f6);
+            }
+            50% {
+                background: linear-gradient(to right, #9f6, #f06);
+            }
+        }
+    </style>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to the Dashboard, {{ current_user.username }}!</h1>
+    </header>
+
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('add_property') }}">Add Property</a>
+        <a href="{{ url_for('feature_listing') }}">Feature Listing</a>
+        <a href="{{ url_for('predict') }}">Prediction</a>
+
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+
+    <p>
+        The way we see it, real wealth means having the money and the freedom to live life on your own terms.
+    </p>
+</body>
+
+</html>
